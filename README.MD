@@ -1,0 +1,2 @@
+User Management API with Transactions
+This is a test task for a Python developer position. The goal is to develop a database and API for managing users and their transactions, create a web-based admin panel for managing data and displaying statistics, and implement authentication, roles, and email notifications on specific events.
