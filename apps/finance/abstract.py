@@ -1,8 +1,10 @@
-import abc
+from typing import Protocol
+
 import models
 
 
-class Notifier(abc.ABCMeta):
-    @abc.abstractmethod
-    def notify_new_transaction(self, transaction: models.Transaction):
+class Notifier(Protocol):
+    def new_transaction(
+            self, transaction: models.Transaction
+    ) -> None:
         ...

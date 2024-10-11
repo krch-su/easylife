@@ -1,0 +1,4 @@
+Transaction ID: {{ transaction_id }}
+Type: {{ transaction_type }}
+Date: {{ date }}
+Amount: {{ amount }}

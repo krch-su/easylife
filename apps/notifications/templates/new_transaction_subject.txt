@@ -1,0 +1,1 @@
+Your {{ transaction_type }} of {{ amount }} was processed

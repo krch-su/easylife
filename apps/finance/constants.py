@@ -2,5 +2,5 @@ from django.db.models import IntegerChoices
 
 
 class TransactionType(IntegerChoices):
-    INCOMING = 1, 'incoming'
-    OUTGOING = 2, 'outgoing'
+    DEPOSIT = 1, 'deposit'
+    WITHDRAWAL = 2, 'withdrawal'
