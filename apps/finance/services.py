@@ -7,12 +7,18 @@ from .constants import TransactionType
 TransactionID = NewType('TransactionID', int)
 
 
+class InvalidTransactionAmount(Exception):
+    pass
+
+
 def add_transaction(
         user_id: int,
         amount: Decimal,
         transaction_type: TransactionType,
         _notifier: abstract.Notifier
 ) -> TransactionID:
+    if amount <= 0:
+        raise InvalidTransactionAmount('Transaction amount should be greater than 0')
     transaction = Transaction(
         user_id=user_id,
         amount=amount,
