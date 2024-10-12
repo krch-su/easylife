@@ -3,4 +3,4 @@
 set -o errexit
 set -o nounset
 
-celery -A easylife worker -l INFO
+celery -A project worker -l DEBUG

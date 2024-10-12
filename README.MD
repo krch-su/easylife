@@ -62,10 +62,12 @@ Create a .env file in the root directory of the project with the following confi
    POSTGRES_PASSWORD=qwertyUIOP
    POSTGRES_DB=easylife
    POSTGRES_USER=easylife
+   CELERY_BR[docker-compose.yml](docker-compose.yml)OKER_URL=redis://redis:6379/0
+   CELERY_RESULT_BACKEND=redis://redis:6379/0
    ```
 
 # API Access Control
-
+[docker-compose.yml](docker-compose.yml)
 Most API endpoints are restricted to users with the is_staff role. Ensure you provide a valid JWT for a user with the is_staff flag set when accessing these endpoints. You can configure this flag via the admin panel.
 
 # Running Tests

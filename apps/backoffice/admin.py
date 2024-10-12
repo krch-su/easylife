@@ -1,9 +1,10 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
-from .views import transactions, users
+from .views import transactions, users, notifications
 from .views.statistics import statistics_view
 from ..finance.models import Transaction
+from ..notifications.models import Notification
 from ..users.models import User
 
 
@@ -41,6 +42,7 @@ backoffice = Backoffice(name='backoffice')
 
 backoffice.register(User, users.UserView)
 backoffice.register(Transaction, transactions.TransactionView)
+backoffice.register(Notification, notifications.NotificationView)
 # backoffice.admin_view(statistics_view)
 
 

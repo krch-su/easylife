@@ -17,6 +17,7 @@ pyjwt = "^2.9.0"
 django-ninja-jwt = "^5.3.4"
 kink = "^0.8.0"
 coverage-badge = "^1.1.2"
+redis = "^5.1.1"
 
 
 [tool.poetry.group.test.dependencies]
