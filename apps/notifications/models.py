@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.db.models import QuerySet
 
@@ -6,7 +8,6 @@ from apps.notifications.constants import NotificationTypes
 
 
 class Notification(models.Model):
-    id = models.BigAutoField()
     user = models.ForeignKey(
         'users.User',
         on_delete=models.DO_NOTHING
@@ -16,8 +17,8 @@ class Notification(models.Model):
         max_length=256,
         choices=NotificationTypes
     )
-    context = models.JSONField()
+    context = models.JSONField(encoder=DjangoJSONEncoder)
     created_at = models.DateTimeField(auto_now=True)
-    sent_at = models.DateTimeField()
+    sent_at = models.DateTimeField(null=True)
 
     objects: QuerySet[Notification]

@@ -1,6 +1,7 @@
+import deal
 from typing import Protocol
 
-import models
+from . import models
 
 
 class Notifier(Protocol):

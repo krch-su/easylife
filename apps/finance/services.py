@@ -1,29 +1,27 @@
+import deal
 from typing import NewType
 from decimal import Decimal
-import abstract
-from models import Transaction
+from . import abstract, models
 from .constants import TransactionType
 
 TransactionID = NewType('TransactionID', int)
 
 
-class InvalidTransactionAmount(Exception):
-    pass
-
-
+@deal.pre(
+    lambda _: _.amount > 0,
+    message='Transaction amount should be greater than 0'
+)
 def add_transaction(
         user_id: int,
         amount: Decimal,
         transaction_type: TransactionType,
-        _notifier: abstract.Notifier
+        notifier: abstract.Notifier
 ) -> TransactionID:
-    if amount <= 0:
-        raise InvalidTransactionAmount('Transaction amount should be greater than 0')
-    transaction = Transaction(
+    transaction = models.Transaction(
         user_id=user_id,
         amount=amount,
-        transaction_type=transaction_type
+        type=transaction_type
     )
     transaction.save()
-    _notifier.new_transaction(transaction)
-    return transaction.id
+    notifier.new_transaction(transaction)
+    return transaction.pk

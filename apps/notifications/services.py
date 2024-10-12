@@ -1,3 +1,5 @@
+from __future__ import annotations
+import deal
 from typing import TYPE_CHECKING, Callable, Iterable
 
 from .constants import NotificationTypes

@@ -1,3 +1,4 @@
+import deal
 from ninja import Schema
 from decimal import Decimal
 from datetime import datetime
@@ -8,17 +9,17 @@ from apps.finance.constants import TransactionType
 
 
 class Transaction(Schema):
+    id: int
     amount: Decimal
-    type: TransactionType
+    transaction_type: TransactionType = Field(alias='type')
     date: datetime
 
 
 class AddTransaction(Schema):
     user_id: int
     amount: Decimal
-    type: TransactionType = Field(alias='transaction_type')
+    transaction_type: TransactionType
 
-    @classmethod
     @field_validator('amount')
     def validate_amount(cls, v: Decimal) -> Decimal:
         if v <= 0:
