@@ -19,4 +19,4 @@ def add_transaction(*_, data: schemes.AddTransaction):
             **data.dict(), notifier=container[Notifier]
         )
     except ServiceError as e:
-        return HttpError(400, str(e))
+        raise HttpError(400, str(e))

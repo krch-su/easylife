@@ -18,7 +18,7 @@ def add(*_, data: schemes.AddUser):
     try:
         return services.add_user(**data.dict())
     except ServiceError as e:
-        return HttpError(400, str(e))
+        raise HttpError(400, str(e))
 
 
 @router.get("/{user_id}", response=schemes.User, auth=JWTAuth())
