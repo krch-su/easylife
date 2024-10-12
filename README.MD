@@ -18,52 +18,67 @@ To set up the project, ensure you have Docker and Docker Compose installed on yo
     ```bash
     docker-compose build && docker-compose up
     ```
+2. **Create Postgres User**
 
-2. **Access the Application:**
+   Inside of docker container execute
+   ```bash
+    psql -U postgres
+    ```
+   
+   Then
+   ```postgres-sql   
+    CREATE USER easylife;
+    ALTER USER easylife SUPERUSER CREATEDB;
+    ALTER USER easylife WITH PASSWORD 'qwertyUIOP';
+    CREATE DATABASE easylife;
+   ```
+
+3. **Access the Application:**
     ```
     Swagger UI: http://localhost:8000/api/docs
     Admin Panel: http://localhost:8000/admin
     ```
    
-# Creating a Superuser
-After the application is running, create a superuser with the following command:
+4. **Creating a Superuser**
 
-```bash
-docker-compose exec manage.py createsuperuser
-```
+   After the application is running, create a superuser with the following command:
 
-# Environment Configuration
+   ```bash
+   docker-compose exec manage.py createsuperuser
+   ```
+
+5. **Environment Configuration**
 Create a .env file in the root directory of the project with the following configuration variables:
 
-```dotenv
-JWT_SECRET=hfuh8f0asdyf723h8f22fdskfjlk
-JWT_EXPIRATION_DELTA=0 0:15
-DATABASE_URL=postgres://easylife:qwertyUIOP@db/easylife
-POSTGRES_PASSWORD=qwertyUIOP
-POSTGRES_DB=easylife
-POSTGRES_USER=easylife
-```
+   ```dotenv
+   JWT_SECRET=hfuh8f0asdyf723h8f22fdskfjlk
+   JWT_EXPIRATION_DELTA=0 0:15
+   DATABASE_URL=postgres://easylife:qwertyUIOP@db/easylife
+   POSTGRES_PASSWORD=qwertyUIOP
+   POSTGRES_DB=easylife
+   POSTGRES_USER=easylife
+   ```
 
 # API Access Control
 
 Most API endpoints are restricted to users with the is_staff role. Ensure you provide a valid JWT for a user with the is_staff flag set when accessing these endpoints. You can configure this flag via the admin panel.
 
-**Running Tests**
+# Running Tests
 To execute the test suite, run:
 
 ```bash
 pytest .
 ```
 
-Before running tests, ensure all development dependencies are installed. You can do this by executing:
+Before running tests, ensure all development dependencies are installed. You can do this:
 
-# Using requirements-dev.txt
+**Using requirements-dev.txt**
 ```bash
 pip install -r requirements-dev.txt
 ```
 
 
-# Or using Poetry
+**Or using Poetry**
 ```bash
 poetry install --no-root
 ```
