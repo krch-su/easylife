@@ -1,7 +1,6 @@
 from unittest.mock import MagicMock
 
 import pytest
-import deal
 
 from apps.finance.abstract import Notifier
 from apps.users.models import User

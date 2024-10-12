@@ -425,24 +425,6 @@ test = ["certifi", "cryptography-vectors (==43.0.1)", "pretend", "pytest (>=6.2.
 test-randomorder = ["pytest-randomly"]
 
 [[package]]
-name = "deal"
-version = "4.24.4"
-description = "**Deal** is a Python library for [design by contract][wiki] (DbC) programming."
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "deal-4.24.4-py3-none-any.whl", hash = "sha256:7fa4139296843fc16e5b8edd49b9a379d829113b1b4bdab0d8a7374cc826e031"},
-    {file = "deal-4.24.4.tar.gz", hash = "sha256:0470af54234cebc760346f4be1a6fdaeefe0215fc58efd630cd4b2d193e4e82e"},
-]
-
-[package.extras]
-all = ["astroid (>=2.11.0)", "deal-solver (>=0.1.2)", "hypothesis", "pygments", "typeguard (>=3.0.0)", "vaa (>=0.2.1)"]
-docs = ["m2r2 (>=0.3.3.post2)", "myst-parser", "sphinx (==7.*)", "sphinx-rtd-theme (==2.*)"]
-integration = ["astroid (>=2.11.0)", "deal-solver (>=0.1.2)", "flake8", "hypothesis", "marshmallow", "pygments", "sphinx (>=4.5.0)", "typeguard (<4.0.0)", "vaa (>=0.2.1)"]
-lint = ["deal-solver (>=0.1.2)", "flake8", "flake8-commas", "flake8-quotes", "hypothesis", "isort", "mypy (>=0.900)", "mypy_test (>=0.1.1)", "pygments", "typeguard (<4.0.0)", "unify"]
-test = ["coverage-conditional-plugin", "coverage[toml]", "docstring-parser", "pytest", "pytest-cov", "urllib3"]
-
-[[package]]
 name = "dj-database-url"
 version = "2.2.0"
 description = "Use Database URLs in your Django Application."
@@ -1162,4 +1144,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "95449d141363beb0e5be8aadf58cdd736607a267c20d61ca19c8251eb42d2295"
+content-hash = "b867279a72e3eed3a1822be57d4ceb86fa1d5a120b01489705cb8c766dd4d1fc"

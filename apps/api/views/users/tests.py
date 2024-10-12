@@ -1,6 +1,6 @@
 import pytest
-import deal
 from ninja.testing import TestClient
+
 from .handlers import router
 
 
@@ -21,7 +21,6 @@ class TestUserEndpoints:
             'password': 'password123'
         }, headers=auth_headers_staff)
 
-        print(response.json())
         assert response.status_code == 200
         assert response.data == 2
 
@@ -33,14 +32,12 @@ class TestUserEndpoints:
         assert response.status_code == 422
         assert response.json()['detail'][0]['msg'] == 'Field required'
 
-
     def test_get_user_authorized(self, client: TestClient, user, mocker, auth_headers_user):        # Mock the User model query to return the test user
 
         response = client.get(f'/{user.id}', headers=auth_headers_user)
 
         assert response.status_code == 200
         assert response.json()['id'] == user.id
-
 
     def test_get_user_unauthorized(self, client: TestClient, mocker, staff, auth_headers_user):
         response = client.get(f'/{staff.id}', headers=auth_headers_user)

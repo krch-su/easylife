@@ -1,5 +1,4 @@
 import pytest
-import deal
 from ninja.testing import TestClient
 
 from apps.finance.abstract import Notifier

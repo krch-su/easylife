@@ -1,6 +1,6 @@
 from __future__ import annotations
-import deal
-from typing import TYPE_CHECKING, Callable, Iterable
+
+from typing import TYPE_CHECKING, Callable, Iterable, NewType
 
 from .constants import NotificationTypes
 from .models import Notification
@@ -11,6 +11,7 @@ if TYPE_CHECKING:
 
 
 Notifier = Callable[[Notification], None]
+NotificationID = NewType('NotificationID', int)
 
 DEFAULT_NOTIFIERS = (
     lambda x: send_email.delay(x.id),
@@ -22,13 +23,13 @@ class NotificationService:
     def __init__(self, notifiers: Iterable[Notifier] = DEFAULT_NOTIFIERS):
         self.notifiers = notifiers
 
-    def new_transaction(self, transaction: Transaction):
+    def new_transaction(self, transaction: Transaction) -> NotificationID:
         notification = Notification(
             user=transaction.user,
             type=NotificationTypes.NEW_TRANSACTION,
             context=dict(
                 recipient=transaction.user.username,
-                transaction_id=transaction.id,
+                transaction_id=transaction.pk,
                 transaction_type=transaction.type,
                 date=transaction.date,
                 amount=transaction.amount,
@@ -36,6 +37,7 @@ class NotificationService:
         )
         notification.save()
         self._notify(notification)
+        return notification.pk
 
     def _notify(self, notification: Notification):
         for notifier in self.notifiers:

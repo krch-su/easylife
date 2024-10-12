@@ -1,11 +1,10 @@
 from decimal import Decimal
 
-import deal
 import pytest
 
 from apps.finance.constants import TransactionType
 from apps.finance.models import Transaction
-from apps.finance.services import add_transaction
+from apps.finance.services import add_transaction, ServiceError
 
 
 class FakeNotifier:
@@ -34,7 +33,7 @@ class TestAddTransaction:
         assert notifier.notifications[0] == transaction
 
     def test_add_transaction_invalid_amount(self, user):
-        with pytest.raises(deal.PreContractError):
+        with pytest.raises(ServiceError):
             add_transaction(
                 user_id=user.pk,
                 amount=Decimal('0.00'),

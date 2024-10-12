@@ -1,4 +1,3 @@
-import deal
 from typing import Protocol
 
 from . import models

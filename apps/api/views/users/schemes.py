@@ -5,6 +5,7 @@ from typing import List
 from ninja import Schema
 from pydantic import Field
 
+from apps.users.constants import MIN_USERNAME_LEN, MIN_PASSWORD_LEN
 from ..transactions.schemes import Transaction
 
 
@@ -15,5 +16,5 @@ class User(Schema):
 
 
 class AddUser(Schema):
-    username: str
-    password: str
+    username: str = Field(min_length=MIN_USERNAME_LEN)
+    password: str = Field(min_length=MIN_PASSWORD_LEN)

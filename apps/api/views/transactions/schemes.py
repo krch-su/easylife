@@ -1,8 +1,7 @@
-import deal
-from ninja import Schema
-from decimal import Decimal
 from datetime import datetime
+from decimal import Decimal
 
+from ninja import Schema
 from pydantic import Field, field_validator
 
 from apps.finance.constants import TransactionType

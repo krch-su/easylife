@@ -1,12 +1,11 @@
-import deal
 from typing import List
 
 from ninja import Router
 from ninja.errors import HttpError
 
-from apps.finance.models import Transaction
 from apps.users import services
 from apps.users.models import User
+from apps.users.services import ServiceError
 from . import schemes
 from ...auth_backends import JWTAuth
 from ...permissions import staff_only
@@ -16,7 +15,10 @@ router = Router(auth=JWTAuth([staff_only]))
 
 @router.post("/")
 def add(*_, data: schemes.AddUser):
-    return services.add_user(**data.dict())
+    try:
+        return services.add_user(**data.dict())
+    except ServiceError as e:
+        return HttpError(400, str(e))
 
 
 @router.get("/{user_id}", response=schemes.User, auth=JWTAuth())

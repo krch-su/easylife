@@ -1,9 +1,10 @@
-import pytest
-import deal
 from unittest.mock import MagicMock
+
+import pytest
 from django.http import HttpRequest
-from .auth_backends import JWTAuth
+
 from apps.users.models import User
+from .auth_backends import JWTAuth
 
 
 @pytest.fixture

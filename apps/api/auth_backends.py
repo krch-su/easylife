@@ -1,8 +1,8 @@
-import deal
 from typing import Iterable, Optional, Callable
 
 from django.http import HttpRequest
 from ninja_jwt.authentication import JWTAuth as _JWTAuth
+
 from apps.users.models import User
 
 Permission = Callable[[User], bool]

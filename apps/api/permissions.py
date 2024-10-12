@@ -1,4 +1,3 @@
-import deal
 from apps.users.models import User
 
 

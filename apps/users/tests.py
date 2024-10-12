@@ -1,8 +1,7 @@
 import pytest
-import deal
 
 from apps.users.models import User
-from apps.users.services import add_user
+from apps.users.services import add_user, ServiceError
 
 
 @pytest.mark.django_db
@@ -23,12 +22,21 @@ class TestAddUser:
         username = ""
         password = "securepassword"
 
-        with pytest.raises(deal.PreContractError):
+        with pytest.raises(ServiceError):
             add_user(username=username, password=password)
 
     def test_add_user_with_empty_password(self):
         username = "testuser"
         password = ""
 
-        with pytest.raises(deal.PreContractError):
+        with pytest.raises(ServiceError):
+            add_user(username=username, password=password)
+
+    def test_error_when_username_already_exists(self):
+        username = "username"
+        password = "securepassword"
+
+        add_user(username=username, password=password)
+
+        with pytest.raises(ServiceError):
             add_user(username=username, password=password)
