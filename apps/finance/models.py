@@ -12,4 +12,4 @@ class Transaction(models.Model):
     )
     type = models.IntegerField(choices=TransactionType)
     amount = models.DecimalField(decimal_places=2, max_digits=8)
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField()
