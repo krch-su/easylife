@@ -1,3 +1,8 @@
+# EasyLife test task
+![Test Status](https://github.com/krch-su/easylife/actions/workflows/ci.yml/badge.svg)
+![Coverage Status](./.github/coverage.svg)
+
+
 ## Overview
 
 This project is a test task for a Python developer position, designed to showcase skills in building a robust user management system. The application includes a comprehensive API for managing users and their transactions, a web-based admin panel for data management and statistical insights, and features authentication, role management, and email notifications for specific events.
