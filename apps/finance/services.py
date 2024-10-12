@@ -29,6 +29,7 @@ def add_transaction(
     transaction = models.Transaction(
         user_id=user_id,
         amount=amount,
+        date=datetime.now(),
         type=transaction_type
     )
     transaction.save()
