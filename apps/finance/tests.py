@@ -98,7 +98,6 @@ class TestGetStatistics:
         start_date = datetime.now() - timedelta(days=10)
         end_date = datetime.now()
 
-        # create_transaction(date=datetime.now() - timedelta(days=9), amount=100.0)
         # Create sample transactions
         create_transaction(date=datetime.now() - timedelta(days=9), amount=100.0)
         create_transaction(date=datetime.now() - timedelta(days=9), amount=50.0)
