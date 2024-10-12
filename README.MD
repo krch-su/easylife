@@ -40,8 +40,8 @@ To set up the project, ensure you have Docker and Docker Compose installed on yo
 
 3. **Access the Application:**
     ```
-    Swagger UI: http://localhost:8000/api/docs
-    Admin Panel: http://localhost:8000/admin
+    Swagger UI: http://localhost:8010/api/docs
+    Admin Panel: http://localhost:8010/admin
     ```
    
 4. **Creating a Superuser**
