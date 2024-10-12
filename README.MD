@@ -67,7 +67,6 @@ Create a .env file in the root directory of the project with the following confi
    ```
 
 # API Access Control
-[docker-compose.yml](docker-compose.yml)
 Most API endpoints are restricted to users with the is_staff role. Ensure you provide a valid JWT for a user with the is_staff flag set when accessing these endpoints. You can configure this flag via the admin panel.
 
 # Running Tests
