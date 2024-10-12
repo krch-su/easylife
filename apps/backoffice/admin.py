@@ -18,7 +18,7 @@ class Backoffice(admin.AdminSite):
         ]
         return my_urls + _urls
 
-    def get_app_list(self, request, **kwargs):
+    def get_app_list(self, request, *args, **kwargs):
         app_list = super().get_app_list(request, kwargs)
         app_list += [
             {
