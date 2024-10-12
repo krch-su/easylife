@@ -66,10 +66,10 @@ Create a .env file in the root directory of the project with the following confi
    CELERY_RESULT_BACKEND=redis://redis:6379/0
    ```
 
-# API Access Control
+## API Access Control
 Most API endpoints are restricted to users with the is_staff role. Ensure you provide a valid JWT for a user with the is_staff flag set when accessing these endpoints. You can configure this flag via the admin panel.
 
-# Running Tests
+## Running Tests
 To execute the test suite, run:
 
 ```bash
@@ -89,6 +89,6 @@ pip install -r requirements-dev.txt
 poetry install --no-root
 ```
 
-# Conclusion
+## Conclusion
 This project demonstrates the ability to implement a user management system with essential features and best practices in API development. Contributions and suggestions for improvements are welcome.
 
