@@ -24,8 +24,11 @@ def add(*_, data: schemes.AddUser):
 @router.get("/{user_id}", response=schemes.User, auth=JWTAuth())
 def get(request, user_id: int):
     if request.user.id == user_id or request.user.is_staff:
-        return User.objects.with_transactions().get(pk=user_id)
-    raise HttpError(401, 'Not authorized')
+        user = User.objects.with_transactions().filter(pk=user_id).first()
+        if not user:
+            raise HttpError(404, 'Not Found')
+        return user
+    raise HttpError(401, 'Not Authorized')
 
 
 @router.get("/", response=List[schemes.User])

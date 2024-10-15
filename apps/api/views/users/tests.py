@@ -32,18 +32,24 @@ class TestUserEndpoints:
         assert response.status_code == 422
         assert response.json()['detail'][0]['msg'] == 'Field required'
 
-    def test_get_user_authorized(self, client: TestClient, user, mocker, auth_headers_user):        # Mock the User model query to return the test user
+    def test_get_user_authorized(self, client: TestClient, user, mocker, auth_headers_user):
 
         response = client.get(f'/{user.id}', headers=auth_headers_user)
 
         assert response.status_code == 200
         assert response.json()['id'] == user.id
 
+    def test_get_user_not_found(self, client: TestClient, user, mocker, auth_headers_staff):
+
+        response = client.get('/99', headers=auth_headers_staff)
+
+        assert response.status_code == 404
+
     def test_get_user_unauthorized(self, client: TestClient, mocker, staff, auth_headers_user):
         response = client.get(f'/{staff.id}', headers=auth_headers_user)
 
         assert response.status_code == 401
-        assert response.json()['detail'] == 'Not authorized'
+        assert response.json()['detail'] == 'Not Authorized'
 
     def test_get_all_users(self, client: TestClient, mocker, user, staff, auth_headers_staff):
         response = client.get('/', headers=auth_headers_staff)
