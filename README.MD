@@ -62,7 +62,7 @@ Create a .env file in the root directory of the project with the following confi
    POSTGRES_PASSWORD=qwertyUIOP
    POSTGRES_DB=easylife
    POSTGRES_USER=easylife
-   CELERY_BR[docker-compose.yml](docker-compose.yml)OKER_URL=redis://redis:6379/0
+   CELERY_BROKER_URL=redis://redis:6379/0
    CELERY_RESULT_BACKEND=redis://redis:6379/0
    ```
 
@@ -80,13 +80,13 @@ Before running tests, ensure all development dependencies are installed. You can
 
 **Using requirements-dev.txt**
 ```bash
-pip install -r requirements-dev.txt
+pip install -r requirements-test.txt
 ```
 
 
 **Or using Poetry**
 ```bash
-poetry install --no-root
+poetry install --no-root --with test
 ```
 
 ## Conclusion
