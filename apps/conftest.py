@@ -2,7 +2,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from apps.finance.abstract import Notifier
+from apps.finance.abstract import NotificationService
 from apps.users.models import User
 from ninja_jwt.schema import TokenObtainPairInputSchema
 
@@ -11,7 +11,7 @@ from ninja_jwt.schema import TokenObtainPairInputSchema
 def container():
     from apps.dependencies import container
     container.clear_cache()
-    container[Notifier] = MagicMock(return_value=MagicMock())
+    container[NotificationService] = MagicMock(return_value=MagicMock())
     return container
 
 

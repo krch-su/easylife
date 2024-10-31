@@ -12,7 +12,7 @@ class FakeNotifier:
     def __init__(self):
         self.notifications = []
 
-    def new_transaction(self, transaction):
+    def create_new_tx_notification(self, transaction):
         self.notifications.append(transaction)
 
 

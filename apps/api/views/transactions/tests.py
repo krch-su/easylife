@@ -1,7 +1,7 @@
 import pytest
 from ninja.testing import TestClient
 
-from apps.finance.abstract import Notifier
+from apps.finance.abstract import NotificationService
 from apps.finance.constants import TransactionType
 from .handlers import router
 
@@ -28,7 +28,7 @@ class TestAddTransaction:
         }, headers=auth_headers_staff)
         assert response.status_code == 200
         assert response.data == 1
-        container[Notifier].new_transaction.assert_called_once()
+        container[NotificationService].create_new_tx_notification.assert_called_once()
 
     @pytest.mark.django_db
     def test_add_transaction_invalid_amount(self, client: TestClient, user, auth_headers_staff):

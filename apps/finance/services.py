@@ -5,6 +5,7 @@ from typing import NewType, List
 
 from django.db.models import Sum
 from django.db.models.functions import TruncDate
+from django.db.transaction import atomic, on_commit
 
 from . import abstract, models
 from .constants import TransactionType
@@ -17,11 +18,12 @@ class ServiceError(Exception):
     pass
 
 
+@atomic
 def add_transaction(
         user_id: int,
         amount: Decimal,
         transaction_type: TransactionType,
-        notifier: abstract.Notifier
+        notifier: abstract.NotificationService
 ) -> TransactionID:
     if amount <= 0:
         raise ServiceError('Transaction amount should be greater than 0')
@@ -33,7 +35,10 @@ def add_transaction(
         type=transaction_type
     )
     transaction.save()
-    notifier.new_transaction(transaction)
+
+    notification = notifier.create_new_tx_notification(transaction)
+
+    on_commit(lambda: notifier.notify_async(notification))
     return transaction.pk
 
 
@@ -64,7 +69,7 @@ def get_statistics(
 
     total_sum = transactions.aggregate(total=Sum('daily_total'))['total'] or 0
 
-    chart_labels = [t['date_only'].isoformat() for t in transactions]  # Use isoformat for date strings
+    chart_labels = [t['date_only'].isoformat() for t in transactions]
     chart_data = [float(t['daily_total']) for t in transactions]
     return Statistics(
         total_transactions=total_transactions,

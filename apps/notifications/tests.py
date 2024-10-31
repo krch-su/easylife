@@ -33,8 +33,8 @@ def notification_service(notifiers):
 
 
 def test_new_transaction_creates_notification(transaction, notification_service):
-    nid = notification_service.new_transaction(transaction)
-    notification = Notification.objects.filter(pk=nid).first()
+    n = notification_service.create_new_tx_notification(transaction)
+    notification = Notification.objects.filter(pk=n.id).first()
 
     assert notification
     assert notification.user == transaction.user
@@ -49,8 +49,9 @@ def test_new_transaction_creates_notification(transaction, notification_service)
 
 
 def test_notifiers_are_called(transaction, notification_service, notifiers):
-    nid = notification_service.new_transaction(transaction)
+    n = notification_service.create_new_tx_notification(transaction)
+    notification_service.notify_async(n)
     for notifier in notifiers:
-        notification = Notification.objects.get(pk=nid)
+        notification = Notification.objects.get(pk=n.id)
         notifier.assert_called_once_with(notification)
 

@@ -11,7 +11,6 @@ if TYPE_CHECKING:
 
 
 Notifier = Callable[[Notification], None]
-NotificationID = NewType('NotificationID', int)
 
 DEFAULT_NOTIFIERS = (
     lambda x: send_email.delay(x.id),
@@ -23,7 +22,7 @@ class NotificationService:
     def __init__(self, notifiers: Iterable[Notifier] = DEFAULT_NOTIFIERS):
         self.notifiers = notifiers
 
-    def new_transaction(self, transaction: Transaction) -> NotificationID:
+    def create_new_tx_notification(self, transaction: Transaction) -> Notification:
         notification = Notification(
             user=transaction.user,
             type=NotificationTypes.NEW_TRANSACTION,
@@ -36,9 +35,8 @@ class NotificationService:
             )
         )
         notification.save()
-        self._notify(notification)
-        return notification.pk
+        return notification
 
-    def _notify(self, notification: Notification):
+    def notify_async(self, notification: Notification):
         for notifier in self.notifiers:
             notifier(notification)
